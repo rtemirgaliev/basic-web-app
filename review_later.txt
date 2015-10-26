@@ -1,0 +1,9 @@
+
+
+transction scoped entity manager
+
+@Repository
+
+@PersistenceContext
+
+

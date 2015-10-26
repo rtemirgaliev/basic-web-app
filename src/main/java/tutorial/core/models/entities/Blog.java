@@ -1,9 +1,17 @@
 package tutorial.core.models.entities;
 
+import javax.persistence.*;
+
+@Entity
 public class Blog {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String title;
+
+    @OneToOne
     private Account owner;
 
     public Long getId() {
