@@ -7,3 +7,5 @@ transction scoped entity manager
 @PersistenceContext
 
 
+Professional java for web app. JPA hibernate chapters. 
+
