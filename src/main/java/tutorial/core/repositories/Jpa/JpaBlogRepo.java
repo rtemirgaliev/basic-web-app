@@ -6,6 +6,7 @@ import tutorial.core.repositories.BlogRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -17,26 +18,55 @@ public class JpaBlogRepo implements BlogRepo {
 
     @Override
     public Blog createBlog(Blog data) {
-        return null;
+        em.persist(data);
+        return data;
     }
 
     @Override
     public List<Blog> findAllBlogs() {
-        return null;
+        Query query = em.createQuery("SELECT b FROM Blog b");
+        return query.getResultList();
     }
 
     @Override
     public Blog findBlog(Long id) {
-        return null;
+        return em.find(Blog.class, id);
     }
 
     @Override
     public Blog findBlogByTitle(String title) {
-        return null;
+        Query query = em.createQuery("SELECT b from Blog where b.title=?1");
+        query.setParameter(1, title);
+        List<Blog> blogs = query.getResultList();
+        if (blogs.isEmpty()) {
+            return null;
+        } else {
+            return blogs.get(0);
+        }
     }
 
     @Override
     public List<Blog> findBlogsByAccount(Long accountId) {
-        return null;
+        Query query = em.createQuery("SELECT b FROM Blog WHERE b.owner.id=?1");
+        query.setParameter(1, accountId);
+        return query.getResultList();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,6 +12,7 @@ import tutorial.core.services.AccountService;
 import tutorial.core.services.exceptions.AccountDoesNotExistException;
 import tutorial.core.services.exceptions.AccountExistsException;
 import tutorial.core.services.exceptions.BlogExistsException;
+import tutorial.core.services.util.AccountList;
 import tutorial.rest.exceptions.BadRequestException;
 import tutorial.rest.exceptions.ConflictException;
 import tutorial.rest.resources.AccountResource;
@@ -20,6 +21,8 @@ import tutorial.rest.resources.asm.AccountResourceAsm;
 import tutorial.rest.resources.asm.BlogResourceAsm;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/rest/accounts")
@@ -30,6 +33,28 @@ public class AccountController {
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
+
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<AccountResource> findAllAccounts(@RequestParam(value = "name", required = false) String name) {
+
+        AccountList list = null;
+
+        if (name == null) {
+            list = accountService.findAllAccounts();
+        } else {
+            Account account = accountService.findByAccountName(name);
+            if (account == null) {
+                list = new AccountList(new ArrayList<Account>());
+            } else {
+                list = new AccountList(Arrays.asList(account));
+            }
+        }
+        //TODO
+
+
+    }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<AccountResource> createAccount( @RequestBody AccountResource sentAccount) {
