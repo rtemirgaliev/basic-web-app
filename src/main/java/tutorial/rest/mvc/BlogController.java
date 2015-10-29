@@ -1,6 +1,7 @@
 package tutorial.rest.mvc;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,7 @@ public class BlogController {
 
     private BlogService blogService;
 
+    @Autowired
     public BlogController(BlogService blogService) {
         this.blogService = blogService;
     }
@@ -49,11 +51,16 @@ public class BlogController {
     public ResponseEntity<BlogResource> getBlog( @PathVariable Long blogId ) {
 
         Blog blog = blogService.findBlog(blogId);
-        BlogResource res = new BlogResourceAsm().toResource(blog);
-        return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
+        if (blog != null) {
+            BlogResource res = new BlogResourceAsm().toResource(blog);
+            return new ResponseEntity<BlogResource>(res, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<BlogResource>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
-    @RequestMapping(value = "/{blogId}/blogEntries", method = RequestMethod.POST)
+    @RequestMapping(value = "/{blogId}/blog-entries", method = RequestMethod.POST)
     public ResponseEntity<BlogEntryResource> createBlogEntry( @PathVariable Long blogId, @RequestBody BlogEntryResource sentBlogEntry) {
 
         BlogEntry createdBlogEntry = null;

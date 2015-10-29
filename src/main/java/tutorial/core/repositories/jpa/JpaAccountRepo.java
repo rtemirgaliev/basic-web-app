@@ -1,4 +1,4 @@
-package tutorial.core.repositories.Jpa;
+package tutorial.core.repositories.jpa;
 
 import org.springframework.stereotype.Repository;
 import tutorial.core.models.entities.Account;

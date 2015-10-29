@@ -1,4 +1,4 @@
-package tutorial.core.repositories.Jpa;
+package tutorial.core.repositories.jpa;
 
 import org.springframework.stereotype.Repository;
 import tutorial.core.models.entities.Blog;
@@ -35,7 +35,7 @@ public class JpaBlogRepo implements BlogRepo {
 
     @Override
     public Blog findBlogByTitle(String title) {
-        Query query = em.createQuery("SELECT b from Blog where b.title=?1");
+        Query query = em.createQuery("SELECT b from Blog b where b.title=?1");
         query.setParameter(1, title);
         List<Blog> blogs = query.getResultList();
         if (blogs.isEmpty()) {
@@ -47,7 +47,7 @@ public class JpaBlogRepo implements BlogRepo {
 
     @Override
     public List<Blog> findBlogsByAccount(Long accountId) {
-        Query query = em.createQuery("SELECT b FROM Blog WHERE b.owner.id=?1");
+        Query query = em.createQuery("SELECT b FROM Blog b WHERE b.owner.id=?1");
         query.setParameter(1, accountId);
         return query.getResultList();
     }

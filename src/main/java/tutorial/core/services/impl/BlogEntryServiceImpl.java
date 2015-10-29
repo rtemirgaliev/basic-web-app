@@ -1,11 +1,17 @@
 package tutorial.core.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tutorial.core.models.entities.BlogEntry;
 import tutorial.core.repositories.BlogEntryRepo;
 import tutorial.core.services.BlogEntryService;
 
+@Service
+@Transactional
 public class BlogEntryServiceImpl  implements BlogEntryService {
 
+    @Autowired
     private BlogEntryRepo entryRepo;
 
 

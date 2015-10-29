@@ -1,4 +1,4 @@
-package tutorial.core.repositories.Jpa;
+package tutorial.core.repositories.jpa;
 
 import org.springframework.stereotype.Repository;
 import tutorial.core.models.entities.BlogEntry;
@@ -43,7 +43,7 @@ public class JpaBlogEntryRepo implements BlogEntryRepo {
 
     @Override
     public List<BlogEntry> findByBlogId(Long blogId) {
-        Query query = em.createQuery("SELECT a FROM BlogEntry b WHERE b.blog.id=?1");
+        Query query = em.createQuery("SELECT b FROM BlogEntry b WHERE b.blog.id=?1");
         query.setParameter(1, blogId);
         return query.getResultList();
     }

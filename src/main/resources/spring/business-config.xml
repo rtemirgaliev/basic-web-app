@@ -14,7 +14,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-<context:component-scan base-package="tutorial.core.repositories.Jpa"/>
+
+    <context:component-scan base-package="tutorial.core.repositories.jpa"/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="username" value="sa"/>
@@ -41,5 +42,6 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
 
+    <context:component-scan base-package="tutorial.core.services.impl"/>
 
 </beans>
