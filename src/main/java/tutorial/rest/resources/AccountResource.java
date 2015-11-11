@@ -11,6 +11,16 @@ public class AccountResource extends ResourceSupport {
 
     private String password;
 
+    private Long rid;
+
+    public Long getRid() {
+        return rid;
+    }
+
+    public void setRid(Long rid) {
+        this.rid = rid;
+    }
+
     public String getName() {
         return name;
     }
